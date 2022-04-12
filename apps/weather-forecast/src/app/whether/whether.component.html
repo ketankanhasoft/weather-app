@@ -1,0 +1,45 @@
+<div style="margin: 50px">
+	<div>
+		<form>
+			<mat-button-toggle-group style="float: right" (click)="getDetails()" [formControl]="selectMode">
+				<mat-button-toggle mat-button value="Hourly">Hourly </mat-button-toggle>
+				<mat-button-toggle mat-button value="Daily">Daily </mat-button-toggle>
+			</mat-button-toggle-group>
+			<mat-form-field class="example-full-width" appearance="fill" style="float: right; margin-right: 2%">
+				<mat-label>Select Cities</mat-label>
+				<input type="text" placeholder="Pick one" aria-label="Number" matInput (keyup)="getDetails()"
+					[formControl]="searchCity" />
+			</mat-form-field>
+		</form>
+	</div>
+
+
+
+	<table style="width: 100%;" *ngIf="hourlyArray.data.length > 0 && selectMode.value === 'Hourly'">
+
+		<tr>
+			<th>City Name</th>
+			<th *ngFor="let finale of hourlyArray.data">{{ finale.time }}</th>
+		</tr>
+		<tr>
+			<td>{{ hourlyArray.cityName }}</td>
+			<td *ngFor="let finale of hourlyArray.data">
+				{{ finale.temp }}
+			</td>
+		</tr>
+	</table>
+
+	<table style="width: 100%;" *ngIf="dailyArray.data.length > 0  && selectMode.value === 'Daily'">
+
+		<tr>
+			<th>City Name</th>
+			<th *ngFor="let daily of dailyArray.data">{{ daily.days }}</th>
+		</tr>
+		<tr>
+			<td>{{ dailyArray.cityName }}</td>
+			<td *ngFor="let daily of dailyArray.data">
+				{{ daily.temp }}
+			</td>
+		</tr>
+	</table>
+</div>
